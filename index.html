@@ -1,425 +1,266 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Antojadas — Galletitas saludables. Lo sano también es rico.">
-  <title>Antojadas | Galletitas Saludables</title>
-  <style>
-    :root{
-      --verde:#8C917D;
-      --verde-oscuro:#626956;
-      --crema:#F4EEE4;
-      --blanco:#FAF8F3;
-      --marron:#6B4D38;
-      --marron-claro:#A88863;
-      --texto:#394036;
-      --borde:rgba(98,105,86,.28);
-      --sombra:0 18px 50px rgba(67,62,49,.10);
-    }
-
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{
-      font-family: Arial, Helvetica, sans-serif;
-      background:var(--blanco);
-      color:var(--texto);
-      line-height:1.6;
-    }
-    a{text-decoration:none;color:inherit}
-    img{display:block;max-width:100%}
-
-    .topbar{
-      position:absolute;
-      z-index:10;
-      top:0;left:0;right:0;
-      display:flex;
-      justify-content:flex-end;
-      gap:10px;
-      padding:22px 5vw;
-    }
-    .top-link{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:10px 16px;
-      border:1px solid rgba(98,105,86,.35);
-      border-radius:999px;
-      background:rgba(250,248,243,.82);
-      backdrop-filter:blur(8px);
-      font-size:.88rem;
-      transition:.25s ease;
-    }
-    .top-link:hover{background:var(--verde);color:var(--blanco);transform:translateY(-2px)}
-
-    .hero{
-      min-height:92vh;
-      display:grid;
-      place-items:center;
-      position:relative;
-      overflow:hidden;
-      background:
-        radial-gradient(circle at 15% 20%, rgba(140,145,125,.18), transparent 25%),
-        radial-gradient(circle at 90% 75%, rgba(168,136,99,.10), transparent 23%),
-        var(--crema);
-      padding:110px 6vw 70px;
-    }
-    .hero:before,.hero:after{
-      content:"";
-      position:absolute;
-      border-radius:50%;
-      background:var(--verde);
-      opacity:.18;
-    }
-    .hero:before{width:330px;height:330px;left:-190px;top:-130px}
-    .hero:after{width:260px;height:260px;right:-120px;bottom:-100px}
-
-    .hero-inner{
-      width:min(1120px,100%);
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:55px;
-      align-items:center;
-      position:relative;
-      z-index:1;
-    }
-    .brand-logo{
-      width:min(500px,100%);
-      border-radius:4px;
-      mix-blend-mode:multiply;
-      opacity:.96;
-    }
-    .hero h1{
-      font-family:Georgia, "Times New Roman", serif;
-      font-size:clamp(3rem,7vw,6.5rem);
-      line-height:.95;
-      color:var(--verde-oscuro);
-      margin:20px 0;
-      font-weight:500;
-      letter-spacing:-.04em;
-    }
-    .hero h1 span{display:block;font-size:.30em;letter-spacing:.34em;text-transform:uppercase;margin-top:24px}
-    .hero p{max-width:560px;font-size:1.08rem;color:#555b50}
-    .hero-btn{
-      display:inline-flex;
-      margin-top:30px;
-      padding:14px 24px;
-      background:var(--verde-oscuro);
-      color:var(--blanco);
-      border-radius:999px;
-      font-weight:700;
-      transition:.25s ease;
-    }
-    .hero-btn:hover{transform:translateY(-3px);box-shadow:var(--sombra)}
-
-    section{padding:100px 6vw}
-    .section-wrap{width:min(1120px,100%);margin:auto}
-    .eyebrow{
-      text-transform:uppercase;
-      letter-spacing:.28em;
-      font-size:.76rem;
-      color:var(--verde-oscuro);
-      font-weight:700;
-      margin-bottom:12px;
-    }
-    .section-title{
-      font-family:Georgia, "Times New Roman", serif;
-      font-size:clamp(2.2rem,5vw,4rem);
-      color:var(--verde-oscuro);
-      font-weight:500;
-      line-height:1.05;
-    }
-
-    .about{
-      background:var(--blanco);
-      text-align:center;
-    }
-    .about-copy{
-      max-width:760px;
-      margin:22px auto 0;
-      font-size:1.05rem;
-      color:#62665c;
-    }
-    .values{
-      margin-top:48px;
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:18px;
-    }
-    .value{
-      padding:30px 22px;
-      background:var(--crema);
-      border:1px solid var(--borde);
-      border-radius:24px;
-    }
-    .value-icon{font-size:2rem;margin-bottom:10px}
-    .value h3{font-family:Georgia,serif;color:var(--marron);font-size:1.35rem;margin-bottom:5px}
-
-    .products{
-      background:
-        linear-gradient(rgba(244,238,228,.94),rgba(244,238,228,.94)),
-        radial-gradient(circle at 50% 0%, rgba(140,145,125,.12), transparent 45%);
-    }
-    .products-head{text-align:center;margin-bottom:50px}
-    .product-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:26px;
-    }
-    .card{
-      background:var(--blanco);
-      border:1px solid var(--borde);
-      border-radius:28px;
-      overflow:hidden;
-      box-shadow:0 10px 35px rgba(67,62,49,.07);
-      transition:.3s ease;
-    }
-    .card:hover{transform:translateY(-7px);box-shadow:var(--sombra)}
-    .card-image{aspect-ratio:1/1;overflow:hidden;background:#eee}
-    .card-image img{width:100%;height:100%;object-fit:cover;transition:.45s ease}
-    .card:hover .card-image img{transform:scale(1.04)}
-    .card-body{padding:25px}
-    .card-number{font-size:.74rem;letter-spacing:.2em;color:var(--verde);font-weight:700}
-    .card h3{
-      font-family:Georgia,serif;
-      color:var(--marron);
-      font-size:1.5rem;
-      line-height:1.15;
-      margin:9px 0 12px;
-    }
-    .card p{color:#65695f;font-size:.94rem}
-    .order-small{
-      display:inline-block;
-      margin-top:18px;
-      padding:10px 16px;
-      border-radius:999px;
-      background:var(--verde);
-      color:var(--blanco);
-      font-size:.86rem;
-      font-weight:700;
-    }
-
-    .contact{
-      background:var(--verde);
-      color:var(--blanco);
-      position:relative;
-      overflow:hidden;
-    }
-    .contact:after{
-      content:"";
-      position:absolute;
-      width:420px;height:420px;
-      border:1px solid rgba(250,248,243,.25);
-      border-radius:50%;
-      right:-170px;top:-180px;
-    }
-    .contact .section-wrap{position:relative;z-index:1}
-    .contact .eyebrow{color:var(--crema)}
-    .contact .section-title{color:var(--blanco)}
-    .contact-copy{max-width:620px;margin-top:16px;color:rgba(250,248,243,.86)}
-    .contact-grid{
-      margin-top:38px;
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:18px;
-      max-width:720px;
-    }
-    .contact-btn{
-      display:flex;
-      align-items:center;
-      gap:15px;
-      padding:20px 22px;
-      border-radius:20px;
-      background:var(--blanco);
-      color:var(--marron);
-      font-weight:700;
-      transition:.25s ease;
-    }
-    .contact-btn:hover{transform:translateY(-4px);box-shadow:0 14px 35px rgba(0,0,0,.13)}
-    .contact-icon{font-size:1.5rem}
-
-    footer{
-      background:var(--marron);
-      color:var(--blanco);
-      min-height:180px;
-      display:grid;
-      place-items:center;
-      text-align:center;
-      padding:50px 20px;
-    }
-    footer p{
-      font-family:Georgia,serif;
-      font-size:clamp(1.35rem,3vw,2.1rem);
-      line-height:1.25;
-    }
-
-    @media(max-width:850px){
-      .hero-inner{grid-template-columns:1fr;text-align:center}
-      .brand-logo{margin:auto}
-      .hero p{margin:auto}
-      .values,.product-grid{grid-template-columns:1fr}
-      .contact-grid{grid-template-columns:1fr}
-      section{padding:75px 5vw}
-    }
-    @media(max-width:560px){
-      .topbar{padding:14px;gap:7px}
-      .top-link{font-size:.78rem;padding:8px 11px}
-      .hero{padding-top:105px}
-      .brand-logo{max-width:92vw}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Antojadas — Galletitas saludables. Lo sano también es rico.">
+<title>Antojadas | Galletitas Saludables</title>
 <style>
-.conocenos-section{background:#F4EEE4}.conocenos-section .section-heading{max-width:760px;margin:0 auto 42px;text-align:center}.eyebrow{color:#8C917D;font-weight:700;letter-spacing:.12em;font-size:.78rem}.conocenos-section h2,.info-card h3{color:#6B4D38}.conocenos-section p,.info-card li{color:#6B4D38;line-height:1.7}.conocenos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.info-card{background:#FAF8F3;border:1px solid rgba(107,77,56,.14);border-radius:22px;padding:34px 30px;min-height:260px;box-shadow:0 10px 30px rgba(107,77,56,.07)}.card-number{display:block;color:#A88863;font-size:2.2rem;font-weight:700;margin-bottom:28px}.info-card ul{padding-left:20px}@media(max-width:800px){.conocenos-grid{grid-template-columns:1fr}.info-card{min-height:auto}}
-</style></head>
+:root{
+  --verde:#8C917D;
+  --verde-oscuro:#626956;
+  --crema:#F4EEE4;
+  --blanco:#FAF8F3;
+  --marron:#6B4D38;
+  --marron-claro:#A88863;
+  --texto:#394036;
+  --borde:rgba(98,105,86,.28);
+  --sombra:0 18px 50px rgba(67,62,49,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--blanco);color:var(--texto);line-height:1.6}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+
+nav{
+  position:sticky;top:0;z-index:100;
+  display:flex;justify-content:center;align-items:center;gap:8px;
+  padding:14px 5vw;
+  background:rgba(250,248,243,.96);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(98,105,86,.15);
+}
+nav a{
+  padding:9px 14px;border-radius:999px;
+  color:var(--verde-oscuro);font-size:.78rem;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;
+  transition:.25s ease;
+}
+nav a:hover{background:var(--crema);color:var(--marron)}
+
+.topbar{
+  display:flex;justify-content:flex-end;gap:10px;
+  padding:12px 5vw;background:var(--crema);
+}
+.top-link{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 14px;border:1px solid rgba(98,105,86,.25);
+  border-radius:999px;background:rgba(250,248,243,.8);
+  font-size:.82rem;
+}
+.hero{
+  min-height:78vh;display:grid;place-items:center;position:relative;overflow:hidden;
+  background:
+    radial-gradient(circle at 15% 20%,rgba(140,145,125,.18),transparent 25%),
+    radial-gradient(circle at 90% 75%,rgba(168,136,99,.10),transparent 23%),
+    var(--crema);
+  padding:80px 6vw 70px;
+}
+.hero:before,.hero:after{
+  content:"";position:absolute;border-radius:50%;background:var(--verde);opacity:.18;
+}
+.hero:before{width:330px;height:330px;left:-190px;top:-130px}
+.hero:after{width:260px;height:260px;right:-120px;bottom:-100px}
+.hero-inner{
+  width:min(1120px,100%);display:grid;grid-template-columns:1fr 1fr;
+  gap:55px;align-items:center;position:relative;z-index:1;
+}
+.brand-logo{width:min(500px,100%);border-radius:4px;mix-blend-mode:multiply;opacity:.96}
+.eyebrow{text-transform:uppercase;letter-spacing:.2em;font-size:.76rem;color:var(--verde-oscuro);font-weight:700;margin-bottom:12px}
+.hero h1{
+  font-family:Georgia,"Times New Roman",serif;font-size:clamp(3rem,7vw,6.5rem);
+  line-height:.95;color:var(--verde-oscuro);margin:20px 0;font-weight:500;letter-spacing:-.04em
+}
+.hero h1 span{display:block;font-size:.30em;letter-spacing:.30em;text-transform:uppercase;margin-top:24px}
+.hero p{max-width:600px;font-size:1.08rem;color:#555b50}
+.hero-btn{
+  display:inline-flex;margin-top:30px;padding:14px 24px;background:var(--verde-oscuro);
+  color:var(--blanco);border-radius:999px;font-weight:700;transition:.25s ease
+}
+.hero-btn:hover{transform:translateY(-3px);box-shadow:var(--sombra)}
+
+section{padding:100px 6vw}
+.section-wrap{width:min(1120px,100%);margin:auto}
+.section-title{
+  font-family:Georgia,"Times New Roman",serif;font-size:clamp(2.2rem,5vw,4rem);
+  color:var(--verde-oscuro);font-weight:500;line-height:1.05
+}
+
+.intro{background:var(--blanco);text-align:center}
+.intro-copy{max-width:850px;margin:25px auto 0;font-size:1.12rem;color:#62665c}
+
+.products{
+  background:
+    linear-gradient(rgba(244,238,228,.94),rgba(244,238,228,.94)),
+    radial-gradient(circle at 50% 0%,rgba(140,145,125,.12),transparent 45%);
+}
+.products-head{text-align:center;margin-bottom:50px}
+.product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.card{
+  background:var(--blanco);border:1px solid var(--borde);border-radius:28px;
+  overflow:hidden;box-shadow:0 10px 35px rgba(67,62,49,.07);transition:.3s ease
+}
+.card:hover{transform:translateY(-7px);box-shadow:var(--sombra)}
+.card-image{aspect-ratio:1/1;overflow:hidden;background:#eee}
+.card-image img{width:100%;height:100%;object-fit:cover;transition:.45s ease}
+.card:hover .card-image img{transform:scale(1.04)}
+.card-body{padding:25px}
+.card-number{font-size:.74rem;letter-spacing:.2em;color:var(--verde);font-weight:700}
+.card h3{font-family:Georgia,serif;color:var(--marron);font-size:1.5rem;line-height:1.15;margin:9px 0 12px}
+.card p{color:#65695f;font-size:.94rem}
+.order-small{
+  display:inline-block;margin-top:18px;padding:10px 16px;border-radius:999px;
+  background:var(--verde);color:var(--blanco);font-size:.86rem;font-weight:700
+}
+
+.conocenos-section{background:var(--crema)}
+.conocenos-heading{max-width:800px;margin:0 auto 48px;text-align:center}
+.conocenos-heading h2{color:var(--marron);font-family:Georgia,serif;font-size:clamp(2.2rem,5vw,4rem);font-weight:500;line-height:1.1}
+.conocenos-heading p{margin-top:18px;color:#6B4D38;font-size:1.05rem}
+.conocenos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.info-card{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  background:var(--blanco);border:1px solid rgba(107,77,56,.14);border-radius:22px;
+  padding:34px 30px;min-height:290px;box-shadow:0 10px 30px rgba(107,77,56,.07);
+  transition:.3s ease
+}
+.info-card:hover{transform:translateY(-5px);box-shadow:var(--sombra)}
+
+.info-card h3{color:var(--marron);font-family:Georgia,serif;font-size:1.35rem;line-height:1.2;margin-bottom:15px}
+.info-card p,.info-card li{color:var(--marron);line-height:1.7}
+.info-card ul{padding-left:0;list-style:none;margin-top:4px}.info-card li{margin:4px 0}
+
+.contact{background:var(--verde);color:var(--blanco);position:relative;overflow:hidden}
+.contact:after{
+  content:"";position:absolute;width:420px;height:420px;border:1px solid rgba(250,248,243,.25);
+  border-radius:50%;right:-170px;top:-180px
+}
+.contact .section-wrap{position:relative;z-index:1}
+.contact .eyebrow{color:var(--crema)}
+.contact .section-title{color:var(--blanco)}
+.contact-copy{max-width:620px;margin-top:16px;color:rgba(250,248,243,.86)}
+.contact-grid{margin-top:38px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:720px}
+.contact-btn{
+  display:flex;align-items:center;gap:15px;padding:20px 22px;border-radius:20px;
+  background:var(--blanco);color:var(--marron);font-weight:700;transition:.25s ease
+}
+.contact-btn:hover{transform:translateY(-4px);box-shadow:0 14px 35px rgba(0,0,0,.13)}
+.contact-icon{font-size:1.5rem}
+
+footer{
+  background:var(--marron);color:var(--blanco);min-height:180px;
+  display:grid;place-items:center;text-align:center;padding:50px 20px
+}
+footer p{font-family:Georgia,serif;font-size:clamp(1.35rem,3vw,2.1rem);line-height:1.25}
+
+@media(max-width:850px){
+  nav{flex-wrap:wrap}
+  .hero-inner{grid-template-columns:1fr;text-align:center}
+  .brand-logo{margin:auto}
+  .hero p{margin:auto}
+  .product-grid,.conocenos-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  section{padding:75px 5vw}
+}
+@media(max-width:560px){
+  nav a{font-size:.68rem;padding:8px 9px}
+  .topbar{padding:10px;gap:7px}
+  .top-link{font-size:.76rem;padding:7px 10px}
+  .hero{padding-top:70px}
+  .brand-logo{max-width:92vw}
+}
+</style>
+</head>
 <body>
 
-  <!-- DATOS A PERSONALIZAR:
-       Reemplazá los enlaces # de ubicación/redes, mail y WhatsApp
-       por los datos reales del emprendimiento. -->
+<nav>
+  <a href="#inicio">Inicio</a>
+  <a href="#productos">Productos</a>
+  <a href="#conocenos">Conocenos un poco más</a>
+  <a href="#pedidos">Pedidos</a>
+</nav>
 
-  <div class="topbar">
-    <a class="top-link" href="https://www.google.com/maps/search/?api=1&query=Balcarce+807%2C+Mor%C3%B3n%2C+Buenos+Aires" target="_blank" rel="noopener">📍 Ubicación</a>
-    <a class="top-link" href="https://www.instagram.com/antojadas.arg/" target="_blank" rel="noopener">◎ Redes sociales</a>
-  </div>
-
-  <header class="hero">
-    <div class="hero-inner">
-      <div>
-        <img class="brand-logo" src="assets/logo-horizontal.jpg" alt="Antojadas — Galletitas saludables">
-      </div>
-      <div>
-        <div class="eyebrow">Galletitas saludables</div>
-        <h1>Antojadas<span>Natural · consciente · rico</span></h1>
-        <p>
-          Una propuesta de galletitas de avena pensada para disfrutar sabores
-          caseros, ingredientes conscientes y ese gustito que siempre da ganas
-          de repetir.
-        </p>
-        <a class="hero-btn" href="#productos">Conocé nuestros productos ↓</a>
-      </div>
-    </div>
-  </header>
-
-  <section class="about" id="ubicacion">
-    <div class="section-wrap">
-      <div class="eyebrow">CONOCENOS UN POCO MÁS</div>
-      <h2 class="section-title">Rico, simple y hecho con dedicación.</h2>
-      <p class="about-copy">
-        En Antojadas buscamos combinar el sabor de lo casero con una propuesta
-        saludable. Cada galletita está pensada para acompañar tus momentos
-        favoritos sin perder lo más importante: que sea rica.
-      </p>
-
-      <div class="values">
-        <article class="value">
-          <div class="value-icon">🌿</div>
-          <h3>Natural</h3>
-          <p>Una propuesta inspirada en ingredientes simples y sabores reales.</p>
-        </article>
-        <article class="value">
-          <div class="value-icon">♡</div>
-          <h3>Con dedicación</h3>
-          <p>Cuidamos cada detalle para que cada bocado se sienta especial.</p>
-        </article>
-        <article class="value">
-          <div class="value-icon">🍪</div>
-          <h3>Para disfrutar</h3>
-          <p>Opciones pensadas para acompañar mates, meriendas y antojos.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="products" id="productos">
-    <div class="section-wrap">
-      <div class="products-head">
-        <div class="eyebrow">Nuestros productos</div>
-        <h2 class="section-title">Elegí tu antojo</h2>
-      </div>
-
-      <div class="product-grid">
-        <article class="card">
-          <div class="card-image">
-            <img src="assets/galleta-chocolate.png" alt="Galleta de avena con chispas de chocolate 70% cacao amargo">
-          </div>
-          <div class="card-body">
-            <div class="card-number">01</div>
-            <h3>Galleta de avena con chispas de chocolate</h3>
-            <p>Con chispas de chocolate 70% cacao amargo.</p>
-            <a class="order-small" href="#pedido">Pedir esta</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-image">
-            <img src="assets/galleta-frutos-rojos.png" alt="Galleta de avena con frutos rojos">
-          </div>
-          <div class="card-body">
-            <div class="card-number">02</div>
-            <h3>Galleta de avena con frutos rojos</h3>
-            <p>Una combinación frutal, suave y llena de sabor.</p>
-            <a class="order-small" href="#pedido">Pedir esta</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-image">
-            <img src="assets/galleta-limon.png" alt="Galleta de avena con limón">
-          </div>
-          <div class="card-body">
-            <div class="card-number">03</div>
-            <h3>Galleta de avena con limón</h3>
-            <p>Un sabor fresco y cítrico para una merienda diferente.</p>
-            <a class="order-small" href="#pedido">Pedir esta</a>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="contact" id="pedido">
-    <div class="section-wrap">
-      <div class="eyebrow" id="redes">Pedidos</div>
-      <h2 class="section-title">¿Querés hacer tu pedido?</h2>
-      <p class="contact-copy">
-        Elegí cómo querés comunicarte con Antojadas y coordinamos tu pedido.
-      </p>
-
-      <div class="contact-grid">
-        <a class="contact-btn" href="mailto:antojadas.arg@gmail.com?subject=Pedido%20Antojadas">
-          <span class="contact-icon">✉</span>
-          <span>Pedir por email</span>
-        </a>
-        <a class="contact-btn" href="https://wa.me/5491127750119?text=Hola%20Antojadas%2C%20quiero%20hacer%20un%20pedido.">
-          <span class="contact-icon">◉</span>
-          <span>Pedir por WhatsApp</span>
-        </a>
-        <a class="contact-btn" href="https://www.instagram.com/antojadas.arg/" target="_blank" rel="noopener" aria-label="Instagram">
-          <span class="contact-icon">◎</span>
-          <span>Instagram</span>
-        </a>
-        <a class="contact-btn" href="https://www.google.com/maps/search/?api=1&query=Balcarce+807%2C+Mor%C3%B3n%2C+Buenos+Aires" target="_blank" rel="noopener" aria-label="Ubicación">
-          <span class="contact-icon">⌖</span>
-          <span>Ver ubicación</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <p>“Lo sano también es rico, antoja te sin culpa”</p>
-  </footer>
-
-<section id="conocenos" class="conocenos-section">
-<div class="container">
-<div class="section-heading">
-<p class="eyebrow">CONOCENOS UN POCO MÁS</p>
-<h2>Más que una galletita, una forma de disfrutar lo cotidiano.</h2>
-<p>En Antojadas creemos que elegir alimentos nutritivos también puede ser rico, simple y disfrutable.</p>
+<div class="topbar">
+  <a class="top-link" href="https://www.google.com/maps/search/?api=1&query=Balcarce+807%2C+Mor%C3%B3n%2C+Buenos+Aires" target="_blank" rel="noopener">📍 Ubicación</a>
+  <a class="top-link" href="https://www.instagram.com/antojadas.arg/" target="_blank" rel="noopener">◎ Redes sociales</a>
 </div>
-<div class="conocenos-grid">
-<article class="info-card"><span class="card-number">01</span><h3>¿A QUIÉNES ACOMPAÑAMOS?</h3><p>Consumidores de productos naturales, deportistas, vegetarianos y celíacos.</p></article>
-<article class="info-card"><span class="card-number">02</span><h3>LO QUE NOS REPRESENTA</h3><ul><li>Honestidad</li><li>Responsabilidad</li><li>Sustentabilidad</li><li>Calidad artesanal</li></ul></article>
-<article class="info-card"><span class="card-number">03</span><h3>NUESTRA MISIÓN</h3><p><strong>Promover una alimentación más consciente</strong>, creando opciones nutritivas que acompañen los momentos cotidianos sin dejar de disfrutar.</p></article>
-</div></div></section></body>
+
+<header class="hero" id="inicio">
+  <div class="hero-inner">
+    <div><img class="brand-logo" src="assets/logo-horizontal.jpg" alt="Antojadas — Galletitas saludables"></div>
+    <div>
+      <h1>Antojadas</h1>
+      <p>Para Antojadas, no se trata de vender una dieta restrictiva o un alimento de prescripción, sino de acompañar momentos cotidianos con una opción nutritiva que haga sentir bien tanto al cuerpo como a la mente.</p>
+      <a class="hero-btn" href="#productos">Conocé nuestros productos ↓</a>
+    </div>
+  </div>
+</header>
+
+<section class="products" id="productos">
+  <div class="section-wrap">
+    <div class="products-head">
+      <div class="eyebrow">Nuestros productos</div>
+      <h2 class="section-title">Elegí tu antojo</h2>
+    </div>
+    <div class="product-grid">
+      <article class="card">
+        <div class="card-image"><img src="assets/galleta-chocolate.png" alt="Galleta de avena con chispas de chocolate 70% cacao amargo"></div>
+        <div class="card-body"><div class="card-number">01</div><h3>Galleta de avena con chispas de chocolate</h3><p>Con chispas de chocolate 70% cacao amargo.</p><a class="order-small" href="#pedidos">Pedir esta</a></div>
+      </article>
+      <article class="card">
+        <div class="card-image"><img src="assets/galleta-frutos-rojos.png" alt="Galleta de avena con frutos rojos"></div>
+        <div class="card-body"><div class="card-number">02</div><h3>Galleta de avena con frutos rojos</h3><p>Una combinación frutal, suave y llena de sabor.</p><a class="order-small" href="#pedidos">Pedir esta</a></div>
+      </article>
+      <article class="card">
+        <div class="card-image"><img src="assets/galleta-limon.png" alt="Galleta de avena con limón"></div>
+        <div class="card-body"><div class="card-number">03</div><h3>Galleta de avena con limón</h3><p>Un sabor fresco y cítrico para una merienda diferente.</p><a class="order-small" href="#pedidos">Pedir esta</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="conocenos-section" id="conocenos">
+  <div class="section-wrap">
+    <div class="conocenos-heading">
+      <div class="eyebrow">Conocenos un poco más</div>
+    </div>
+    <div class="conocenos-grid">
+      <article class="info-card">
+        <h3>¿A QUIÉNES ACOMPAÑAMOS?</h3>
+        <p>Consumidores de productos naturales, deportistas, vegetarianos y celíacos.</p>
+      </article>
+      <article class="info-card">
+        <h3>LO QUE NOS REPRESENTA</h3>
+        <ul>
+          <li>Honestidad</li>
+          <li>Responsabilidad</li>
+          <li>Sustentabilidad</li>
+          <li>Calidad artesanal.</li>
+        </ul>
+      </article>
+      <article class="info-card">
+        <h3>NUESTRA MISIÓN</h3>
+        <p>Promover una alimentación más consciente, creando opciones nutritivas que acompañen los momentos cotidianos sin dejar de disfrutar.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="pedidos">
+  <div class="section-wrap">
+    <div class="eyebrow">Pedidos</div>
+    <h2 class="section-title">¿Querés hacer tu pedido?</h2>
+    <p class="contact-copy">Elegí cómo querés comunicarte con Antojadas y coordinamos tu pedido.</p>
+    <div class="contact-grid">
+      <a class="contact-btn" href="mailto:antojadas.arg@gmail.com?subject=Pedido%20Antojadas"><span class="contact-icon">✉</span><span>Pedir por email</span></a>
+      <a class="contact-btn" href="https://wa.me/5491127750119?text=Hola%20Antojadas%2C%20quiero%20hacer%20un%20pedido."><span class="contact-icon">◉</span><span>Pedir por WhatsApp</span></a>
+      <a class="contact-btn" href="https://www.instagram.com/antojadas.arg/" target="_blank" rel="noopener"><span class="contact-icon">◎</span><span>Instagram</span></a>
+      <a class="contact-btn" href="https://www.google.com/maps/search/?api=1&query=Balcarce+807%2C+Mor%C3%B3n%2C+Buenos+Aires" target="_blank" rel="noopener"><span class="contact-icon">⌖</span><span>Ver ubicación</span></a>
+    </div>
+  </div>
+</section>
+
+<footer><p>“Lo sano también es rico, antoja te sin culpa”</p></footer>
+
+</body>
 </html>
