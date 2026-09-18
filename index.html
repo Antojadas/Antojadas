@@ -66,7 +66,10 @@ nav a:hover{background:var(--crema);color:var(--marron)}
   width:min(1120px,100%);display:grid;grid-template-columns:1fr 1fr;
   gap:55px;align-items:center;position:relative;z-index:1;
 }
-.brand-logo{width:min(500px,100%);border-radius:4px;mix-blend-mode:multiply;opacity:.96}
+.brand-logo-wrap{width:min(500px,100%);margin:auto}
+.brand-logo{width:100%;height:auto;display:block}
+.logo-mobile{display:none}
+.logo-desktop{display:block}
 .eyebrow{text-transform:uppercase;letter-spacing:.2em;font-size:.76rem;color:var(--verde-oscuro);font-weight:700;margin-bottom:12px}
 .hero h1{
   font-family:Georgia,"Times New Roman",serif;font-size:clamp(3rem,7vw,6.5rem);
@@ -156,13 +159,16 @@ footer p{font-family:Georgia,serif;font-size:clamp(1.35rem,3vw,2.1rem);line-heig
 @media(max-width:850px){
   nav{flex-wrap:wrap}
   .hero-inner{grid-template-columns:1fr;text-align:center}
-  .brand-logo{margin:auto}
+  .brand-logo-wrap{margin:auto}
   .hero p{margin:auto}
   .product-grid,.conocenos-grid{grid-template-columns:1fr}
   .contact-grid{grid-template-columns:1fr}
   section{padding:75px 5vw}
 }
 @media(max-width:560px){
+  .logo-desktop{display:none}
+  .logo-mobile{display:block}
+  .brand-logo-wrap{width:min(560px,100%);margin:auto}
   nav a{font-size:.68rem;padding:8px 9px}
   .topbar{padding:10px;gap:7px}
   .top-link{font-size:.76rem;padding:7px 10px}
@@ -187,7 +193,10 @@ footer p{font-family:Georgia,serif;font-size:clamp(1.35rem,3vw,2.1rem);line-heig
 
 <header class="hero" id="inicio">
   <div class="hero-inner">
-    <div><img class="brand-logo" src="assets/logo-horizontal.jpg" alt="Antojadas — Galletitas saludables"></div>
+    <div class="brand-logo-wrap">
+      <img class="brand-logo logo-desktop" src="assets/logo-circular.png" alt="Antojadas">
+      <img class="brand-logo logo-mobile" src="assets/logo-horizontal.png" alt="Antojadas">
+    </div>
     <div>
       <h1>Antojadas</h1>
       <p>Para Antojadas, no se trata de vender una dieta restrictiva o un alimento de prescripción, sino de acompañar momentos cotidianos con una opción nutritiva que haga sentir bien tanto al cuerpo como a la mente.</p>
